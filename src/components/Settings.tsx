@@ -7,7 +7,7 @@ import CvC from "./SettingsCvC";
 export default function Settings() {
   type choice = "pvp" | "pvc" | "cvc";
 
-  var [screen, setScreen] = useState<string>();
+  var [screen, setScreen] = useState<choice>();
 
   function handleScreenChange(choice: choice) {
     setScreen(choice);

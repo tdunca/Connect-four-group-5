@@ -6,3 +6,12 @@
   display: flex;
   flex-direction: column;
 }
+.formfield {
+  display: flex;
+  max-width: 100px;
+  flex-direction: column;
+  margin: 10px;
+}
+.startbtn {
+  background: greenyellow;
+}
