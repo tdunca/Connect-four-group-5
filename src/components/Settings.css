@@ -1,0 +1,8 @@
+.settingOverlay {
+  height: 400px;
+  width: 600px;
+  border: 1px, solid, black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
