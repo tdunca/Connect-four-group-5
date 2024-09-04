@@ -5,6 +5,7 @@ import PvC from "./SettingsPvC";
 import CvC from "./SettingsCvC";
 
 export default function Settings() {
+  //Flytta opponents state hit istället för i varje component? Startknappen borde ligga här i bottnen också
   type choice = "pvp" | "pvc" | "cvc";
 
   var [screen, setScreen] = useState<choice>();

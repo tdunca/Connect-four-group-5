@@ -18,7 +18,7 @@ export default function PvP() {
   );
   return (
     <>
-      <form action="submit" className="formfield">
+      <article className="formfield">
         <section className="">
           <h3>Player 1: </h3>
           <input
@@ -40,7 +40,7 @@ export default function PvP() {
             onChange={(e) => setPlayer2Name(e.target.value)}
           />
         </section>
-      </form>
+      </article>
       {startGame}
     </>
   );

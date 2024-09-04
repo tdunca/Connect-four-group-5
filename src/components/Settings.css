@@ -8,9 +8,9 @@
 }
 .formfield {
   display: flex;
-  max-width: 100px;
-  flex-direction: column;
+  flex-direction: row;
   margin: 10px;
+  justify-content: space-around;
 }
 .startbtn {
   background: greenyellow;
