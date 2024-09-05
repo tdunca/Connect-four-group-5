@@ -10,7 +10,7 @@ type Grid = string[][];
 
 const createGrid = (): Grid => Array.from({ length: rows }, () => Array(columns).fill(" "));
 
-//Håller koll på grid och nuvarande spelare -----  Måste mergas ihop med Simeons Playerskod
+//Håller koll på grid och nuvarande spelare
 const Board: React.FC = () => {
 	const [grid, setGrid] = useState<Grid>(createGrid);
 	const [currentPlayer, setCurrentPlayer] = useState<string>(playerX);
