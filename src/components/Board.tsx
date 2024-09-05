@@ -9,7 +9,7 @@ type Grid = string[][];
 
 const createGrid = (): Grid => Array.from({ length: rows }, () => Array(columns).fill(" "));
 
-//Håller koll på grid och nuvarande spelare - Keeps track of grid and current player
+//Håller koll på grid och nuvarande spelare -----  Måste mergas ihop med Simeons Playerskod
 const Board: React.FC = () => {
 	const [grid, setGrid] = useState<Grid>(createGrid);
 	const [currentPlayer, setCurrentPlayer] = useState<string>(playerX);
@@ -26,7 +26,7 @@ const Board: React.FC = () => {
 				newGrid[row][column] = currentPlayer;
 				setGrid(newGrid);
 
-//Kollar om nuvarande spelare vinner ----- Hur gör vi med detta? Måste mergas ihop med Jens WinChecker
+//Kollar om nuvarande spelare vinner ----- Måste mergas ihop med Jens WinChecker
 				if (checkWin(currentPlayer, newGrid)) {
 					setWinner(currentPlayer);
 				} else {
@@ -41,3 +41,34 @@ const canPlaceToken = (column: number): boolean => grid[0][column] === " ";
 
 };
 
+//Resettar spelet  - vet inte om det behövs här eller om vi gör det i game?
+const resetGame = (): void => {
+	setGrid(createGrid());
+	setCurrentPlayer(playerX);
+	setWinner(null);
+
+};
+
+//Renderar grid och kontrollerar spelet - Krockar när Winchecker inte finns här i...
+const renderGrid = (): React.ReactNode => {
+	return grid.map((row, rowIndex) => (
+		<React.Fragment key={rowIndex}>
+		{row.map((cell,colIndex) => (
+			<React.Fragment key={colIndex}>
+				<button onClick={() => placeToken(colIndex)}>{cell}</button>
+				</React.Fragment>
+		))}
+</React.Fragment>
+    ));
+  };
+
+    return (
+    <div>
+      {renderGrid()}
+      {winner && <p>{`Player ${winner} wins!`}</p>}
+      <button onClick={resetGame}>Reset</button>
+    </div>
+  );
+};
+
+export default Board;

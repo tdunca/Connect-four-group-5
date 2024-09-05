@@ -1,4 +1,5 @@
 import Game from "./components/Game";
+import Board from "./components/Board";
 import Settings from "./components/Settings";
 import "./App.css";
 
