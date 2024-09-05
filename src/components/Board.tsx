@@ -39,9 +39,8 @@ const Board: React.FC = () => {
 //Kollar om en bricka kan bli placerad i specifik column
 const canPlaceToken = (column: number): boolean => grid[0][column] === " ";
 
-};
 
-//Resettar spelet  - vet inte om det behövs här eller om vi gör det i game?
+//Resettar spelet
 const resetGame = (): void => {
 	setGrid(createGrid());
 	setCurrentPlayer(playerX);
@@ -49,7 +48,7 @@ const resetGame = (): void => {
 
 };
 
-//Renderar grid och kontrollerar spelet - Krockar när Winchecker inte finns här i...
+//Renderar grid och kontrollerar spelet
 const renderGrid = (): React.ReactNode => {
 	return grid.map((row, rowIndex) => (
 		<React.Fragment key={rowIndex}>
@@ -60,15 +59,15 @@ const renderGrid = (): React.ReactNode => {
 		))}
 </React.Fragment>
     ));
-  };
+    };
 
     return (
     <div>
-      {renderGrid()}
-      {winner && <p>{`Player ${winner} wins!`}</p>}
-      <button onClick={resetGame}>Reset</button>
+        {renderGrid()}
+        {winner && <p>{`Player ${winner} wins!`}</p>}
+        <button onClick={resetGame}>Reset</button>
     </div>
-  );
+    );
 };
 
 export default Board;
