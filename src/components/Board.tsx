@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './Board.css'
 
 const rows = 6;
 const columns = 7;
