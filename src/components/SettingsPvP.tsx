@@ -1,16 +1,23 @@
 import "./Settings.css";
-import { Player } from "../klasser/Players";
+import { Player } from "../klasser/Player";
 import { useState } from "react";
+import { Options } from "../klasser/Options";
 
-export default function PvP() {
-  const [player1Name, setPlayer1Name] = useState<string>(); //får böka lite mer med typesen senare
-  const [player2Name, setPlayer2Name] = useState<string>();
+export default function PvP(props: Options) {
+  const [player1Name, setPlayer1Name] = useState<string>(
+    props.player1name || "Player 1"
+  ); //får böka lite mer med typesen senare
+  const [player2Name, setPlayer2Name] = useState<string>(
+    props.player2name || "Player 2"
+  );
 
   const startGame = (
     <button
       className="startbtn"
       onClick={(event) => {
-        alert(player1Name + " vs " + player2Name);
+        props.player1name = player1Name;
+        props.player2name = player2Name;
+        props.start = true;
       }}
     >
       Start Game
@@ -40,8 +47,8 @@ export default function PvP() {
             onChange={(e) => setPlayer2Name(e.target.value)}
           />
         </section>
+        {startGame}
       </article>
-      {startGame}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Player } from "../klasser/Players";
+import { Player } from "../klasser/Player";
 
 export default function Game() {
   return (
