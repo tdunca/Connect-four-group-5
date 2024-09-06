@@ -8,8 +8,20 @@ import { useState } from "react";
 function App() {
   const [options, setOptions] = useState<Options>(new Options());
 
+  function handleSetOptions() {
+    //setOptions();
+  }
   return (
-    <>{!options.start ? <Settings {...options}></Settings> : <Game></Game>}</>
+    <>
+      {!options.start ? (
+        <Settings
+          options={options}
+          handleSetOptions={handleSetOptions}
+        ></Settings>
+      ) : (
+        <Game></Game>
+      )}
+    </>
   );
 }
 
