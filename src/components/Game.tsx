@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Players";
-import Board from "./Board";
-import { validateInput } from "../utils/validateInput";
+//import Board from "../klasser/Board";
+//import { validateInput } from "../utils/validateInput";
 import { useWinCheck } from "../klasser/WinCheck"; // Import the win check hook
-
-//selects and checks columns a token can be placed
-/* function getRandomColumn(board) {
-  let column; // random selected column to place a token
-  do {
-    column = Math.floor(Math.random() * board.colums);
-  } while (!board.canPlaceToken(column)); // checks if a token can be placed
-  return column;
-} */
 
 const Game: React.FC = () => {
   // a vertical board 7 columns across and 6 rows high
@@ -115,6 +106,27 @@ const Game: React.FC = () => {
       setCurrentPlayerIndex(1 - currentPlayerIndex);
     }
   };
+
+  // toggle game mode (btw PvP and PvB)
+  const toggleGameMode = () => {
+    setIsVsBot(!isVsBot);
+  };
+
+  return (
+    <div>
+      <h1>Connect 4</h1>
+      <button onClick={toggleGameMode}>
+        {isVsBot ? "Switch to PvP" : "Switch to PvB"}
+      </button>
+      <div>
+        {players.map((player, index) => (
+          <Player key={index} name={player.name} symbol={player.symbol} />
+        ))}
+      </div>
+      <Board board={board} onCellClick={handleCellClick} />
+      {message && <p>{message} </p>}
+    </div>
+  );
 };
 
 export default Game;
