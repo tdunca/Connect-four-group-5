@@ -25,7 +25,7 @@ const Game: React.FC = () => {
     { name: "Player 2", symbol: "O" },
   ]);
 
-  //state for tracking the player's turn. (0-'X'-player, 1-'O'-player)
+  //state for tracking the player's turn. (0='X'-player, 1='O'-player)
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
   // gameMode track (PvsP, PvsB - ).
@@ -77,5 +77,23 @@ const Game: React.FC = () => {
       setMessage("This column is full! Try another one!"); //Displays a message when the column is full, prompting the user to choose another column
       return;
     }
+
+    /* function to place a player's symbol in the empty cell */
+    const newBoard = [...board]; //a copy of the board array not to modify the original board state
+    //loop from bottom to top.iterates upwards to find the lowest empty cell
+    for (let row = newBoard.length - 1; row >= 0; row--) {
+      //check if the selected cell is empty
+      if (newBoard[row][column] === "") {
+        //if it's empty place the player's symbol
+        newBoard[row][column] = currentPlayer.symbol;
+        //when the symbol is placed in the lowest cell, break; the function to prevent further checking
+        break;
+      }
+    }
+
+    //update the board state
+    setBoard(newBoard);
   };
 };
+
+export default Game;
