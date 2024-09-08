@@ -68,5 +68,8 @@ const Game: React.FC = () => {
     resetBoard();
   }, [isVsBot]); // useEffect runs whenever isVsBot changes
 
-  /* Handle click even */
+  /* Handle click event.  */
+  const handleCellClick = (column: number) => {
+    const currentPlayer = players;
+  };
 };
