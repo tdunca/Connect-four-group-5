@@ -104,7 +104,15 @@ const Game: React.FC = () => {
 
     //check if the current player has won the game.
     if (winCheck(currentPlayer.symbol)) {
-      setMessage(``);
+      setMessage(`${currentPlayer.name} Wins!`);
+      // checks if there is no empty cells
+    } else if (isFull()) {
+      setMessage("It's a draw!");
+    } else {
+      //if no win the next player turn
+
+      //swithes the current player. toggles btw 0 and 1
+      setCurrentPlayerIndex(1 - currentPlayerIndex);
     }
   };
 };
