@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Players";
 import Board from "./Board";
 import { validateInput } from "../utils/validateInput";
+import { useWinCheck } from "../klasser/WinCheck" // Import the win check hook
 
 //selects and checks columns a token can be placed
 /* function getRandomColumn(board) {
@@ -13,10 +14,12 @@ import { validateInput } from "../utils/validateInput";
 } */
 
 const Game: React.FC = () => {
+  const rows = 6;
+  const columns = 7;
   /* States for the game: */
   //board states. 7 rows and 6 columns
   const [board, setBoard] = useState<string[][]>(
-    Array.from({ length: 6 }, () => Array(7).fill(""))
+    Array.from({ length: rows }, () => Array(columns).fill(""))
   );
 
   //states for players. (X & O)
@@ -33,6 +36,9 @@ const Game: React.FC = () => {
 
   // state to hold messages
   const [message, setMessage] = useState<string | null>(null);
+
+  //check the win with useWinCheck
+  const{winCheck, isFull} = useWinCheck(rows,columns, board)
 
   // reset the board to it's initial state
   const resetBoard = () => {
@@ -93,6 +99,12 @@ const Game: React.FC = () => {
 
     //update the board state
     setBoard(newBoard);
+
+    //check if the current player has won the game.
+    if(checkWin(newBoard, currentPlayer.symbol))
+
+
+
   };
 };
 
