@@ -69,7 +69,13 @@ const Game: React.FC = () => {
   }, [isVsBot]); // useEffect runs whenever isVsBot changes
 
   /* Handle click event.  */
+  // the function that handle the click event when a cell is clicked
   const handleCellClick = (column: number) => {
-    const currentPlayer = players;
+    const currentPlayer = players[currentPlayerIndex]; // get the current player
+    //check if a column is full before allowing a move.
+    if (board[0][column] !== "") {
+      setMessage("This column is full! Try another one!"); //Displays a message when the column is full, prompting the user to choose another column
+      return;
+    }
   };
 };
