@@ -1,5 +1,5 @@
 import "./Settings.css";
-import { Player } from "../klasser/Players";
+import { Player } from "../klasser/Player";
 import { useState } from "react";
 
 export default function PvC() {
@@ -46,7 +46,6 @@ export default function PvC() {
           </div>
         </section>
       </article>
-      {startGame}
     </>
   );
 }

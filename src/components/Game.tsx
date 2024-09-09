@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Player } from "../klasser/Players";
+import { Player } from "../klasser/Player";
 import { Board } from "../components/Board";
 
 //import Board from "../klasser/Board";
@@ -113,7 +113,6 @@ const Game: React.FC = () => {
   const toggleGameMode = () => {
     setIsVsBot(!isVsBot);
   };
-
 
   return (
     <div>

@@ -1,11 +1,28 @@
 import Game from "./components/Game";
 import Settings from "./components/Settings";
-import "./App.css";
+import { Options } from "./klasser/Options";
 
-let showSettings = true;
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  return <>{showSettings ? <Settings></Settings> : <Game></Game>}</>;
+  const [options, setOptions] = useState<Options>(new Options());
+
+  function handleSetOptions() {
+    //setOptions();
+  }
+  return (
+    <>
+      {!options.start ? (
+        <Settings
+          options={options}
+          handleSetOptions={handleSetOptions}
+        ></Settings>
+      ) : (
+        <Game></Game>
+      )}
+    </>
+  );
 }
 
 export default App;
