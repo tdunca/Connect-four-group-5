@@ -9,7 +9,7 @@ const player0 = "0";
 type Grid = string[][];
 
 interface BoardProps {
-  onCellClick: () => void;
+  handleCellClick: (column: number) => void;
   board: Grid;
 }
 
@@ -34,12 +34,12 @@ export default function Board(props: BoardProps) {
         setGrid(newGrid);
 
         //Kollar om nuvarande spelare vinner ----- Måste mergas ihop med Jens WinChecker
-        if (checkWin(currentPlayer, newGrid)) {
-          setWinner(currentPlayer);
-        } else {
-          setCurrentPlayer(currentPlayer === playerX ? player0 : playerX);
-        }
-        break;
+        // if (checkWin(currentPlayer, newGrid)) {
+        //   setWinner(currentPlayer);
+        // } else {
+        //   setCurrentPlayer(currentPlayer === playerX ? player0 : playerX);
+        //  }
+        //  break;
       }
     }
   };
