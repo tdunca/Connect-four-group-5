@@ -8,11 +8,16 @@ const player0 = "0";
 
 type Grid = string[][];
 
+interface BoardProps {
+  onCellClick: () => void;
+  board: Grid;
+}
+
 const createGrid = (): Grid =>
   Array.from({ length: rows }, () => Array(columns).fill(" "));
 
 //Håller koll på grid och nuvarande spelare
-export const Board: React.FC = () => {
+export default function Board(props: BoardProps) {
   const [grid, setGrid] = useState<Grid>(createGrid);
   const [currentPlayer, setCurrentPlayer] = useState<string>(playerX);
   const [winner, setWinner] = useState<string | null>(null);
@@ -68,6 +73,4 @@ export const Board: React.FC = () => {
       <button onClick={resetGame}>Reset</button>
     </div>
   );
-};
-
-export default Board;
+}
