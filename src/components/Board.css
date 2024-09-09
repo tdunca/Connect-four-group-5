@@ -1,0 +1,52 @@
+.board-container {
+	display: grid;
+	grid-template-columns: repeat(7, 50px);
+	gap: 5px;
+	justify-content: center;
+	margin: 20px;
+}
+
+.cell-button {
+	width: 50px;
+	height: 50px;
+	font-size: 24px;
+	text-align: center;
+	line-height: 50px;
+	background-color: #f0f0f0;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+.cell-button:hover {
+	background-color: #e0e0e0;
+}
+
+.cell-button:active {
+	transform: scale(0.95);
+}
+
+.status {
+	text-align: center;
+	margin: 10px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.reset-button {
+	display: block;
+	margin: 10px auto;
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+	background-color: #0056b3;
+}
