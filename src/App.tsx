@@ -8,8 +8,11 @@ import { useState } from "react";
 function App() {
   const [options, setOptions] = useState<Options>(new Options());
 
-  function handleSetOptions() {
-    //setOptions();
+  //const stringifiedOptions = JSON.stringify(options);
+
+  function handleSetOptions(newOptions: Options) {
+    console.log("New options set!: " + JSON.stringify(newOptions));
+    setOptions({ ...newOptions });
   }
   return (
     <>
@@ -21,6 +24,7 @@ function App() {
       ) : (
         <Game></Game>
       )}
+      <div>{}</div>
     </>
   );
 }

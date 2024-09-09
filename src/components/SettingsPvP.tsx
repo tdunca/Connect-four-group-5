@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Options } from "../klasser/Options";
 
 interface SettingProps {
-  handleSetOptions: () => void;
+  handleSetOptions: (newOptions: Options) => void;
   options: Options;
 }
 
@@ -15,18 +15,18 @@ export default function PvP(props: SettingProps) {
   const [player2Name, setPlayer2Name] = useState<string>(
     props.options.player2name || "Player 2"
   );
-  const startGame = (
-    <button
-      className="startbtn"
-      onClick={(event) => {
-        props.options.player1name = player1Name;
-        props.options.player2name = player2Name;
-        props.options.start = true;
-      }}
-    >
-      Start Game
-    </button>
-  );
+  // const startGame = (
+  //   <button
+  //     className="startbtn"
+  //     onClick={(event) => {
+  //       props.options.player1name = player1Name;
+  //       props.options.player2name = player2Name;
+  //       props.options.start = true;
+  //     }}
+  //   >
+  //     Start Game
+  //   </button>
+  // );
   return (
     <>
       <article className="formfield">
@@ -51,7 +51,7 @@ export default function PvP(props: SettingProps) {
             onChange={(e) => setPlayer2Name(e.target.value)}
           />
         </section>
-        {startGame}
+        {}
       </article>
     </>
   );

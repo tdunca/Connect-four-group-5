@@ -1,19 +1,18 @@
 import "./Settings.css";
-import { ReactHTMLElement, useState } from "react";
+import { useState } from "react";
 import PvP from "./SettingsPvP";
 import PvC from "./SettingsPvC";
 import CvC from "./SettingsCvC";
 import { Options } from "../klasser/Options";
 
 interface SettingProps {
-  handleSetOptions: () => void;
+  handleSetOptions: (newOptions: Options) => void;
   options: Options;
 }
 
 export default function Settings(props: SettingProps) {
   type choice = "pvp" | "pvc" | "cvc";
   var [screen, setScreen] = useState<string>();
-  //var [options, setOptions] = useState<Options>();
 
   function handleScreenChange(choice: choice) {
     setScreen(choice);
@@ -22,8 +21,10 @@ export default function Settings(props: SettingProps) {
     <button
       className="startbtn"
       onClick={(event) => {
-        props.handleSetOptions;
-        alert(props.options.player1name + " vs " + props.options.player2name);
+        props.options.start = true;
+        props.handleSetOptions(props.options);
+        return props.options;
+        //alert(props.options.player1name + " vs " + props.options.player2name);
       }}
     >
       Start Game
