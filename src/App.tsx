@@ -13,7 +13,7 @@ function App() {
   }
   return (
     <>
-      {!options.start ? (
+      {!options.start ? ( //"!" för att se Settings component, ta bort för att se game PLACEHOLDER
         <Settings
           options={options}
           handleSetOptions={handleSetOptions}

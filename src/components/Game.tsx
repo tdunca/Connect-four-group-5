@@ -7,6 +7,7 @@ import Board from "../components/Board";
 import { useWinCheck } from "../klasser/WinCheck"; // Import the win check hook
 
 const Game: React.FC = () => {
+  //skriv om React.FC till default function för att kunna ta emot props från settings
   // a vertical board 7 columns across and 6 rows high
   const rows = 6;
   const columns = 7;
@@ -121,7 +122,7 @@ const Game: React.FC = () => {
         {isVsBot ? "Switch to PvP" : "Switch to PvB"}
       </button>
       <div></div>
-      <Board board={board} onCellClick={handleCellClick} />
+      <Board board={board} handleCellClick={handleCellClick} />
       {message && <p>{message} </p>}
     </div>
   );
