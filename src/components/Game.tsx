@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Players";
+import { Board } from "../components/Board";
+
 //import Board from "../klasser/Board";
 //import { validateInput } from "../utils/validateInput";
 import { useWinCheck } from "../klasser/WinCheck"; // Import the win check hook
@@ -111,6 +113,7 @@ const Game: React.FC = () => {
   const toggleGameMode = () => {
     setIsVsBot(!isVsBot);
   };
+
 
   return (
     <div>
