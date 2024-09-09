@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/Board";
+import "./Game.css";
 
 //import Board from "../klasser/Board";
 //import { validateInput } from "../utils/validateInput";
-import { useWinCheck } from "../klasser/WinCheck"; // Import the win check hook
+import { useWinCheck } from "../utils/WinCheck"; // Import the win check hook
 
 const Game: React.FC = () => {
   //skriv om React.FC till default function för att kunna ta emot props från settings
@@ -117,13 +118,17 @@ const Game: React.FC = () => {
 
   return (
     <div>
-      <h1>Connect 4</h1>
-      <button onClick={toggleGameMode}>
-        {isVsBot ? "Switch to PvP" : "Switch to PvB"}
-      </button>
-      <div></div>
+      <div className="C4-text">
+        <h1>Connect 4</h1>
+      </div>
+
       <Board board={board} handleCellClick={handleCellClick} />
       {message && <p>{message} </p>}
+      <div className="switch">
+        <button onClick={toggleGameMode}>
+          {isVsBot ? "Switch to PvP" : "Switch to PvB"}
+        </button>
+      </div>
     </div>
   );
 };

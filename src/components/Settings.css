@@ -1,17 +1,23 @@
 .settingOverlay {
   height: 400px;
   width: 600px;
-  border: 1px, solid, black;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  background-color: rgb(132, 144, 92);
+  padding: 2rem;
+  border-radius: 2.5rem;
 }
+
 .formfield {
   display: flex;
   flex-direction: row;
   margin: 10px;
   justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.214);
+  padding: 1rem;
 }
+
 .startbtn {
   background: greenyellow;
 }
