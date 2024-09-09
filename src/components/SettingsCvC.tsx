@@ -1,39 +1,39 @@
 import "./Settings.css";
-import { Player } from "../klasser/Player";
 import { useState } from "react";
+import { Options } from "../klasser/Options";
 
-export default function PvC() {
-  const [bot1Difficulty, setBot1Difficulty] = useState<string>("Easy");
-  const [bot2Difficulty, setBot2Difficulty] = useState<string>("Easy");
+interface SettingProps {
+  handleSetOptions: (newOptions: Options) => void;
+  options: Options;
+}
 
-  const startGame = (
-    <button
-      className="startbtn"
-      onClick={(event) => {
-        alert(
-          "bot" +
-            "(" +
-            bot1Difficulty +
-            ")" +
-            " vs " +
-            "Bot" +
-            "(" +
-            bot2Difficulty +
-            ")"
-        );
-      }}
-    >
-      Start Game
-    </button>
-  );
+export default function CvC(props: SettingProps) {
+  type difficulty = "easy" | "hard";
+  const [bot1Difficulty, setBot1Difficulty] = useState<string>("easy");
+  const [bot2Difficulty, setBot2Difficulty] = useState<string>("easy"); //lokal state
+
+  function setDifficulty(player: string, difficulty: difficulty) {
+    const updatedOptions = { ...props.options };
+    if (player === "bot1") {
+      updatedOptions.bot1difficulty = difficulty;
+      updatedOptions.player1name = "bot1(" + difficulty + ")";
+      setBot1Difficulty(difficulty);
+    }
+    if (player === "bot2") {
+      updatedOptions.bot2difficulty = difficulty;
+      updatedOptions.player2name = "bot2(" + difficulty + ")";
+      setBot2Difficulty(difficulty);
+    }
+    props.handleSetOptions(updatedOptions);
+  }
   return (
     <>
       <article className="formfield">
         <section className="">
           <h3>Select bot 1 difficulty: {bot1Difficulty}</h3>
           <div>
-            <button onClick={() => setBot1Difficulty("Easy")}>Easy</button>
-            <button onClick={() => setBot1Difficulty("Hard")}>Hard</button>
+            <button onClick={() => setDifficulty("bot1", "easy")}>Easy</button>
+            <button onClick={() => setDifficulty("bot1", "hard")}>Hard</button>
           </div>
         </section>
 
@@ -41,8 +41,8 @@ export default function PvC() {
           <h3>Select bot 2 difficulty: {bot2Difficulty}</h3>
 
           <div>
-            <button onClick={() => setBot2Difficulty("Easy")}>Easy</button>
-            <button onClick={() => setBot2Difficulty("Hard")}>Hard</button>
+            <button onClick={() => setDifficulty("bot2", "easy")}>Easy</button>
+            <button onClick={() => setDifficulty("bot2", "hard")}>Hard</button>
           </div>
         </section>
       </article>

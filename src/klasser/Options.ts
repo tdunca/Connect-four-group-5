@@ -9,8 +9,8 @@ export class Options {
   start: boolean;
 
   constructor() {
-    this.player1name = "Player 1";
-    this.player2name = "Player 2";
+    this.player1name = "";
+    this.player2name = "";
     this.gamemode = "pvp";
     this.score = 0;
     this.start = false;

@@ -15,23 +15,41 @@ export default function Settings(props: SettingProps) {
   var [screen, setScreen] = useState<string>();
 
   function handleScreenChange(choice: choice) {
+    props.options.gamemode = choice;
     setScreen(choice);
   }
   const startGame = (
     <button
       className="startbtn"
       onClick={(event) => {
-        props.options.start = true;
-        props.handleSetOptions(props.options);
-        return props.options;
-        //alert(props.options.player1name + " vs " + props.options.player2name);
+        // props.options.start = true;
+        if (
+          (props.options.player1name === "" &&
+            props.options.gamemode === "pvp") ||
+          (props.options.player2name === "" && props.options.gamemode === "pvp")
+        ) {
+          alert("You cant have no name!");
+        } //här skulle man lätt kunna ha lite CSS regler och text som dyker upp och säger vad felet är.
+        //har en bugg här med att när namnen nollställs i props.options så är de kvar i rutan i SettingsPVP, kan behöva böka med states där men blir en ToDo
+        //den ballar också ur på om jag spelar mot en bot då p2 name inte är definerad, agh
+        else if (
+          props.options.gamemode === "pvp" ||
+          (props.options.gamemode === "pvc" &&
+            props.options.player1name === props.options.player2name)
+        ) {
+          alert("You can't have the same name!");
+          props.options.player1name = "";
+          props.options.player2name = "";
+          props.handleSetOptions(props.options);
+        } else {
+          props.options.start = true;
+          props.handleSetOptions(props.options); // call the function last
+        }
       }}
     >
       Start Game
     </button>
   );
-
-  //console.log(props.gamemode);
 
   return (
     <>
@@ -50,11 +68,21 @@ export default function Settings(props: SettingProps) {
         <button onClick={() => handleScreenChange("pvc")}>
           Player vs Computer
         </button>
-        {screen === "pvc" && <PvC></PvC>}
+        {screen === "pvc" && (
+          <PvC
+            options={props.options}
+            handleSetOptions={props.handleSetOptions}
+          ></PvC>
+        )}
         <button onClick={() => handleScreenChange("cvc")}>
           Computer vs Computer
         </button>
-        {screen === "cvc" && <CvC></CvC>}
+        {screen === "cvc" && (
+          <CvC
+            options={props.options}
+            handleSetOptions={props.handleSetOptions}
+          ></CvC>
+        )}
         {startGame}
       </div>
     </>

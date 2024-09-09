@@ -4,10 +4,15 @@ import Board from "../components/Board";
 
 //import Board from "../klasser/Board";
 //import { validateInput } from "../utils/validateInput";
-import { useWinCheck } from "../klasser/WinCheck"; // Import the win check hook
+import { useWinCheck } from "../utils/WinCheck"; // Import the win check hook
+import { Options } from "../klasser/Options";
 
-const Game: React.FC = () => {
-  //skriv om React.FC till default function för att kunna ta emot props från settings
+interface GameProps {
+  options: Options;
+}
+
+export default function Game(props: GameProps) {
+  //skrev om från React.FC till default function för att kunna ta emot props från settings
   // a vertical board 7 columns across and 6 rows high
   const rows = 6;
   const columns = 7;
@@ -126,6 +131,4 @@ const Game: React.FC = () => {
       {message && <p>{message} </p>}
     </div>
   );
-};
-
-export default Game;
+}

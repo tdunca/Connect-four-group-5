@@ -1,21 +1,24 @@
 import "./Settings.css";
-import { Player } from "../klasser/Player";
 import { useState } from "react";
+import { Options } from "../klasser/Options";
 
-export default function PvC() {
+interface SettingProps {
+  handleSetOptions: (newOptions: Options) => void;
+  options: Options;
+}
+
+export default function PvC(props: SettingProps) {
+  type difficulty = "easy" | "hard";
   const [player1Name, setPlayer1Name] = useState<string>();
-  const [botDifficulty, setBotDifficulty] = useState<string>("Easy");
+  const [botDifficulty, setBotDifficulty] = useState<difficulty>("easy"); //lokal state
 
-  const startGame = (
-    <button
-      className="startbtn"
-      onClick={(event) => {
-        alert(player1Name + " vs " + "Bot" + "(" + botDifficulty + ")");
-      }}
-    >
-      Start Game
-    </button>
-  );
+  function setName(player: "player1", name: string) {
+    const updatedOptions = { ...props.options };
+    updatedOptions.bot1difficulty = botDifficulty;
+    updatedOptions.player1name = name;
+    updatedOptions.player2name = "none"; //"none" för att inte trigga felet "empty name", ToDo
+    props.handleSetOptions(updatedOptions);
+  }
   return (
     <>
       <article className="formfield">
@@ -26,7 +29,7 @@ export default function PvC() {
             name="Player1"
             id="player1name"
             value={player1Name}
-            onChange={(e) => setPlayer1Name(e.target.value)}
+            onChange={(e) => setName("player1", e.target.value)}
           />
         </section>
 
@@ -34,8 +37,8 @@ export default function PvC() {
           <h3>Select bot difficulty: {botDifficulty}</h3>
 
           <div>
-            <button onClick={() => setBotDifficulty("Easy")}>Easy</button>
-            <button onClick={() => setBotDifficulty("Hard")}>Hard</button>
+            <button onClick={() => setBotDifficulty("easy")}>Easy</button>
+            <button onClick={() => setBotDifficulty("hard")}>Hard</button>
           </div>
         </section>
       </article>
