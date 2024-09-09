@@ -2,7 +2,7 @@
 
 export class Player {
   constructor(public name: string, public symbol: string) {
-    //this.name = name;
-    //this.symbol = symbol;
+    this.name = name;
+    this.symbol = symbol;
   }
 }
