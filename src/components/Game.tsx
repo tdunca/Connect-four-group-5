@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
-import { Board } from "../components/Board";
+import Board from "../components/Board";
 
 //import Board from "../klasser/Board";
 //import { validateInput } from "../utils/validateInput";
@@ -120,11 +120,7 @@ const Game: React.FC = () => {
       <button onClick={toggleGameMode}>
         {isVsBot ? "Switch to PvP" : "Switch to PvB"}
       </button>
-      <div>
-        {players.map((player, index) => (
-          <Player key={index} name={player.name} symbol={player.symbol} />
-        ))}
-      </div>
+      <div></div>
       <Board board={board} onCellClick={handleCellClick} />
       {message && <p>{message} </p>}
     </div>
