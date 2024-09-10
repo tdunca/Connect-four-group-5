@@ -21,6 +21,7 @@ export default function Board(props: BoardProps) {
   const [grid, setGrid] = useState<Grid>(createGrid);
   const [currentPlayer, setCurrentPlayer] = useState<string>(playerX);
   const [winner, setWinner] = useState<string | null>(null);
+  const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
 
   const placeToken = (column: number): void => {
     if (winner || !canPlaceToken(column)) return;
@@ -50,10 +51,20 @@ export default function Board(props: BoardProps) {
         {row.map((cell, colIndex) => (
           <button
             key={colIndex}
-            className="cell"
+            className={`cell ${
+              cell === playerX
+                ? "x-cell"
+                : cell === player0
+                ? "o-cell"
+                : hoveredColumn === colIndex
+                ? "hovered-column"
+                : ""
+            }`}
             onClick={() => placeToken(colIndex)}
+            onMouseEnter={() => setHoveredColumn(colIndex)}
+            onMouseLeave={() => setHoveredColumn(null)}
           >
-            {cell}
+            {cell !== " " ? <span className="star">★</span> : ""}
           </button>
         ))}
       </React.Fragment>

@@ -54,7 +54,7 @@ export default function Settings(props: SettingProps) {
   return (
     <>
       <div className="settingOverlay">
-        <h2>Settings</h2>
+        <h2>Choose Gamemode</h2>
 
         <button onClick={() => handleScreenChange("pvp")}>
           Player vs Player
