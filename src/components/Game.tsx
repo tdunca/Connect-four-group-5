@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/Board";
+import botMove from "../utils/bot";
 import "./Game.css";
 //import Board from "../klasser/Board";
 //import { validateInput } from "../utils/validateInput";
 import { useWinCheck } from "../utils/WinCheck"; // Import the win check hook
 import { Options } from "../klasser/Options";
-
 
 interface GameProps {
   options: Options;
@@ -80,6 +80,7 @@ export default function Game(props: GameProps) {
   const handleCellClick = (column: number) => {
     const currentPlayer = players[currentPlayerIndex]; // get the current player
     //check if a column is full before allowing a move.
+
     if (board[0][column] !== "") {
       setMessage("This column is full! Try another one!"); //Displays a message when the column is full, prompting the user to choose another column
       return;

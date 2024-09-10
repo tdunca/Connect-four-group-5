@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Board.css";
+import botMove from "../utils/bot";
 
 const rows = 6;
 const columns = 7;
@@ -23,6 +24,10 @@ export default function Board(props: BoardProps) {
   const [winner, setWinner] = useState<string | null>(null);
 
   const placeToken = (column: number): void => {
+    setTimeout(() => {
+      console.log(botMove(grid, "hard")); //botMove med timeout 1 sec, ska vara i game egentligen
+    }, 1000);
+
     if (winner || !canPlaceToken(column)) return;
 
     const newGrid = [...grid];
