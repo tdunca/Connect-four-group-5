@@ -35,10 +35,14 @@ export default function PvC(props: SettingProps) {
 
         <section>
           <h3>Select bot difficulty: {botDifficulty}</h3>
-
-          <div>
-            <button onClick={() => setBotDifficulty("easy")}>Easy</button>
-            <button onClick={() => setBotDifficulty("hard")}>Hard</button>
+          <div className="difficulty">
+            {" "}
+            <div className="easy">
+              <button onClick={() => setBotDifficulty("easy")}>Easy</button>
+            </div>
+            <div className="hard">
+              <button onClick={() => setBotDifficulty("hard")}>Hard</button>
+            </div>
           </div>
         </section>
       </article>

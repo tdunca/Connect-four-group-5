@@ -122,17 +122,13 @@ export default function Game(props: GameProps) {
 
   return (
     <div>
-      <div className="C4-text">
-        <h1>Connect 4</h1>
-      </div>
-
-      <Board board={board} handleCellClick={handleCellClick} />
-      {message && <p>{message} </p>}
       <div className="switch">
         <button onClick={toggleGameMode}>
           {isVsBot ? "Switch to PvP" : "Switch to PvB"}
         </button>
       </div>
+      <Board board={board} handleCellClick={handleCellClick} />
+      {message && <p>{message} </p>}
     </div>
   );
 }

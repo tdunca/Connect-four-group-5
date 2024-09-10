@@ -25,9 +25,10 @@
 	background-color: rgb(223, 219, 219);
 }
 
-.cell:hover {
+.hovered-column {
 	scale: 1.05;
 	transition: all 0.2s;
+	background-color: rgba(208, 205, 205, 0.79);
 }
 
 .x-cell {
@@ -39,7 +40,7 @@
 }
 
 .star {
-	font-size: 2.5rem;
+	font-size: 2.9rem;
 	color: black;
-	j
+	margin-bottom: 0.5rem;
 }

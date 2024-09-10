@@ -15,7 +15,10 @@ function App() {
   }
   return (
     <>
-      {options.start ? ( //"!" för att se Settings component, ta bort för att se game PLACEHOLDER
+      <div className="C4-text">
+        <h1>Connect 4</h1>
+      </div>
+      {!options.start ? ( //"!" för att se Settings component, ta bort för att se game PLACEHOLDER
         <Settings
           options={options}
           handleSetOptions={handleSetOptions}

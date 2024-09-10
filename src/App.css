@@ -12,18 +12,16 @@
   transition: filter 300ms;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+.C4-text {
+  background-color: yellowgreen;
+  border: black 2px solid;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: 70%;
+  height: 8rem;
+  margin-bottom: 2rem;
 }
