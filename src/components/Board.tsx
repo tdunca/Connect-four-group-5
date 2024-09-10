@@ -50,10 +50,12 @@ export default function Board(props: BoardProps) {
         {row.map((cell, colIndex) => (
           <button
             key={colIndex}
-            className="cell"
+            className={`cell ${
+              cell === playerX ? "x-cell" : cell === player0 ? "o-cell" : ""
+            }`}
             onClick={() => placeToken(colIndex)}
           >
-            {cell}
+            {cell !== " " ? <span className="star">★</span> : ""}
           </button>
         ))}
       </React.Fragment>

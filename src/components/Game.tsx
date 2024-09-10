@@ -7,7 +7,6 @@ import "./Game.css";
 import { useWinCheck } from "../utils/WinCheck"; // Import the win check hook
 import { Options } from "../klasser/Options";
 
-
 interface GameProps {
   options: Options;
 }

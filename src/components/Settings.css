@@ -1,5 +1,4 @@
 .settingOverlay {
-  height: 400px;
   width: 600px;
   border-radius: 5px;
   display: flex;
@@ -20,4 +19,13 @@
 
 .startbtn {
   background: greenyellow;
+  font-size: 1.3rem;
+  color: black;
+  margin-top: 1rem;
+}
+
+h2 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 2.5rem;
+  color: black;
 }
