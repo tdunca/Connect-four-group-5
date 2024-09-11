@@ -10,15 +10,24 @@ interface SettingProps {
 export default function PvC(props: SettingProps) {
   type difficulty = "easy" | "hard";
   const [player1Name, setPlayer1Name] = useState<string>();
-  const [botDifficulty, setBotDifficulty] = useState<difficulty>("easy"); //lokal state
+  const [bot1Difficulty, setBot1Difficulty] = useState<difficulty>("easy"); //lokal state
 
   function setName(player: "player1", name: string) {
     // setName kallas för varje onChange, men knappar uppdaterar inte state automatiskt utan väntar på handle set options, toDo
     const updatedOptions = { ...props.options };
-    updatedOptions.bot1difficulty = botDifficulty;
     updatedOptions.player1name = name;
     updatedOptions.player2name = "none"; //"none" för att inte trigga felet "empty name", ToDo
+
     props.handleSetOptions(updatedOptions);
+  }
+  function setDifficulty(player: string, difficulty: difficulty) {
+    const updatedOptions = { ...props.options };
+    if (player === "bot1") {
+      updatedOptions.bot1difficulty = difficulty;
+      updatedOptions.player1name = "bot(" + difficulty + ")";
+      setBot1Difficulty(difficulty);
+      props.handleSetOptions(updatedOptions);
+    }
   }
   return (
     <>
@@ -35,14 +44,18 @@ export default function PvC(props: SettingProps) {
         </section>
 
         <section>
-          <h3>Select bot difficulty: {botDifficulty}</h3>
+          <h3>Select bot difficulty: {bot1Difficulty}</h3>
           <div className="difficulty">
             {" "}
             <div className="easy">
-              <button onClick={() => setBotDifficulty("easy")}>Easy</button>
+              <button onClick={() => setDifficulty("bot1", "easy")}>
+                Easy
+              </button>
             </div>
             <div className="hard">
-              <button onClick={() => setBotDifficulty("hard")}>Hard</button>
+              <button onClick={() => setDifficulty("bot1", "hard")}>
+                Hard
+              </button>
             </div>
           </div>
         </section>

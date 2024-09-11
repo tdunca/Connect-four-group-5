@@ -26,24 +26,21 @@ export default function Game(props: GameProps) {
   const [message, setMessage] = useState<string | null>(null);
   const { winCheck, isFull } = useWinCheck(rows, columns, board);
 
-  // Сбрасываем состояние игры
   const resetBoard = () => {
     setBoard(Array.from({ length: rows }, () => Array(columns).fill(" ")));
-    setCurrentPlayerIndex(0);
     setMessage(null);
   };
 
-  // Проверяем, можно ли поставить жетон в колонку
   const canPlaceToken = (column: number): boolean => {
-    return board[0][column] === " "; // Если верхняя ячейка пуста, можно ставить жетон
+    return board[0][column] === " ";
   };
   const handleCellClick = (column: number) => {
-    if (message) return; // Если игра завершена, не делаем ничего
+    if (message) return;
     if (!canPlaceToken(column)) {
-      setMessage("This column is full! Try another one!"); // Колонка заполнена
+      setMessage("This column is full! Try another one!");
       return;
     }
-    placeToken(column); // Размещаем жетон
+    placeToken(column);
   };
 
   // useEffect-hook to reset the game when switching btw PvsP and PvsB modes
@@ -82,43 +79,32 @@ export default function Game(props: GameProps) {
     setTimeout(() => {
       //ta bort timeout för felsökning om ni vill
       handleCellClick(column);
-    }, 1000);
+    }, 100);
   }
 
   //check if a column is full before allowing a move.
-
-  // Функция для размещения жетона
   //skrev om placeToken till en function för att ha tillgång till den i hela Game, annars måste den ligga i rätt följd
   function placeToken(column: number) {
     const currentPlayer = players[currentPlayerIndex];
     const newBoard = board.map((row) => [...row]);
 
-    // Ищем последнюю свободную ячейку в колонке
-    for (let row = rows - 1; row >= 0; row--) {
-      if (newBoard[row][column] === " ") {
-        newBoard[row][column] = currentPlayer.symbol; // Ставим жетон
-        break;
-      }
-    }
-
-    setBoard(newBoard); // Обновляем доску
-
-    //   if (turn === botTurn){
-    //   setBoard(botMove())
-    //   playerTurn = true;
-    // }
-
-    // Проверяем, есть ли победитель
     if (winCheck(currentPlayer.symbol)) {
       setMessage(`${currentPlayer.name} Wins!`);
     } else if (isFull()) {
       setMessage("It's a draw!");
     } else {
-      setCurrentPlayerIndex(1 - currentPlayerIndex); // Меняем игрока
+      setCurrentPlayerIndex(1 - currentPlayerIndex);
     }
-  }
 
-  // Обработка клика на колонке
+    for (let row = rows - 1; row >= 0; row--) {
+      if (newBoard[row][column] === " ") {
+        newBoard[row][column] = currentPlayer.symbol;
+        break;
+      }
+    }
+
+    setBoard(newBoard);
+  }
 
   return (
     <div>

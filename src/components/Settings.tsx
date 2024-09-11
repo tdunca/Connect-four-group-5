@@ -24,18 +24,17 @@ export default function Settings(props: SettingProps) {
       onClick={(event) => {
         // props.options.start = true;
         if (
-          (props.options.player1name === "" &&
+          (props.options.gamemode === "pvp" &&
+            props.options.player1name === "" &&
             props.options.gamemode === "pvp") ||
-          (props.options.player2name === "" && props.options.gamemode === "pvp")
+          props.options.player2name === ""
         ) {
           alert("You cant have no name!");
         } //här skulle man lätt kunna ha lite CSS regler och text som dyker upp och säger vad felet är.
         //har en bugg här med att när namnen nollställs i props.options så är de kvar i rutan i SettingsPVP, kan behöva böka med states där men blir en ToDo
-        //den ballar också ur på om jag spelar mot en bot då p2 name inte är definerad, agh
-        else if (
-          props.options.gamemode === "pvp" ||
-          (props.options.gamemode === "pvc" &&
-            props.options.player1name === props.options.player2name)
+        if (
+          props.options.gamemode === "pvp" &&
+          props.options.player1name === props.options.player2name
         ) {
           alert("You can't have the same name!");
           props.options.player1name = "";
