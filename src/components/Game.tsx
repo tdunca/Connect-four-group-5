@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/GameBoard";
-//import Board from "../components/Board";
 import botMove from "../utils/bot";
 import "./Game.css";
 import { Options } from "../klasser/Options";
 import { useWinCheck } from "../utils/WinCheck";
+import { DropAnimation } from "./DropAnimation"; // Import the animateDrop function
 
 interface GameProps {
   options: Options;
@@ -26,10 +26,13 @@ export default function Game(props: GameProps) {
   const [message, setMessage] = useState<string | null>(null);
   const { winCheck, isFull } = useWinCheck(rows, columns, board);
 
+
+  // Reset the game
   const resetBoard = () => {
     setBoard(Array.from({ length: rows }, () => Array(columns).fill(" ")));
     setMessage(null);
   };
+
 
   const canPlaceToken = (column: number): boolean => {
     return board[0][column] === " ";
@@ -40,6 +43,14 @@ export default function Game(props: GameProps) {
       setMessage("This column is full! Try another one!");
       return;
     }
+    
+    DropAnimation(
+      board,
+      column,
+      currentPlayer.symbol,
+      setBoard,
+      afterTokenPlacement
+    );
     placeToken(column);
   };
 
@@ -88,12 +99,14 @@ export default function Game(props: GameProps) {
     const currentPlayer = players[currentPlayerIndex];
     const newBoard = board.map((row) => [...row]);
 
+
     if (winCheck(currentPlayer.symbol)) {
       setMessage(`${currentPlayer.name} Wins!`);
     } else if (isFull()) {
       setMessage("It's a draw!");
     } else {
-      setCurrentPlayerIndex(1 - currentPlayerIndex);
+
+      setCurrentPlayerIndex(1 - currentPlayerIndex); // Switch players
     }
 
     for (let row = rows - 1; row >= 0; row--) {
@@ -105,6 +118,7 @@ export default function Game(props: GameProps) {
 
     setBoard(newBoard);
   }
+
 
   return (
     <div>
