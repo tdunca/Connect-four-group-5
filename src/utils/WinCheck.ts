@@ -71,14 +71,14 @@ export const useWinCheck = (
     return grid.every((row) => row.every((cell) => cell !== " "));
   };
 
-  const winCheck = (symbol: string): boolean => {
+  function winCheck(symbol: string): boolean {
     return (
       checkHorizontalWin(symbol) ||
       checkVerticalWin(symbol) ||
       checkDiagonalWinTLBR(symbol) ||
       checkDiagonalWinBLTR(symbol)
     );
-  };
+  }
 
   return { winCheck, isFull };
 };
