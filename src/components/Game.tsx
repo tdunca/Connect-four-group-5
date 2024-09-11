@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/GameBoard";
 import botMove from "../utils/bot";
-import "./Game.css";
 import { Options } from "../klasser/Options";
 import { useWinCheck } from "../utils/WinCheck";
 import { DropAnimation } from "./DropAnimation";
