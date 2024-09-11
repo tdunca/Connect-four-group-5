@@ -26,6 +26,18 @@ export default function Game(props: GameProps) {
   const [message, setMessage] = useState<string | null>(null);
   const { winCheck, isFull } = useWinCheck(rows, columns, board);
 
+  const currentPlayer = players[currentPlayerIndex];
+
+  useEffect(() => {
+    if (winCheck(currentPlayer.symbol)) {
+      setMessage(`${currentPlayer.name} Wins!`);
+    } else if (isFull()) {
+      setMessage("It's a draw!");
+    } else {
+      setCurrentPlayerIndex(1 - currentPlayerIndex);
+    }
+  }, [board]);
+
   // Reset the game
   const resetBoard = () => {
     setBoard(Array.from({ length: rows }, () => Array(columns).fill(" ")));
@@ -42,20 +54,18 @@ export default function Game(props: GameProps) {
       return;
     }
 
-    DropAnimation(
-      board,
-      column,
-      currentPlayer.symbol,
-      setBoard,
-      () => placeToken(column) // Move token placement logic here
-    );
+    // DropAnimation(
+    //   board,
+    //   column,
+    //   currentPlayer.symbol,
+    //   setBoard,
+    placeToken(column);
+    // );
   };
 
   // useEffect-hook to reset the game when switching btw PvsP and PvsB modes
   /* Handle click events - cell click and player moves  */
   // the function that handle the click event when a cell is clicked
-
-  const currentPlayer = players[currentPlayerIndex]; // get the current player
 
   if (
     props.options.gamemode === "pvc" &&
@@ -87,7 +97,7 @@ export default function Game(props: GameProps) {
     setTimeout(() => {
       //ta bort timeout för felsökning om ni vill
       handleCellClick(column);
-    }, 100);
+    }, 1000);
   }
 
   //check if a column is full before allowing a move.
@@ -95,14 +105,6 @@ export default function Game(props: GameProps) {
   function placeToken(column: number) {
     const currentPlayer = players[currentPlayerIndex];
     const newBoard = board.map((row) => [...row]);
-
-    if (winCheck(currentPlayer.symbol)) {
-      setMessage(`${currentPlayer.name} Wins!`);
-    } else if (isFull()) {
-      setMessage("It's a draw!");
-    } else {
-      setCurrentPlayerIndex(1 - currentPlayerIndex); // Switch players
-    }
 
     for (let row = rows - 1; row >= 0; row--) {
       if (newBoard[row][column] === " ") {
