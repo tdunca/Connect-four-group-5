@@ -21,14 +21,23 @@ export const DropAnimation = (
 
   if (rowToPlace === -1) return; // No space available, return
 
-  newBoard[0][column] = currentPlayerSymbol;
-  setBoard(newBoard); // Set token at the top row
+  newBoard[-1][column] = currentPlayerSymbol;
+  setBoard(newBoard);
 
-  setTimeout(() => {
-    newBoard[0][column] = " ";
+  let currentRow = -1;
 
-    newBoard[rowToPlace][column] = currentPlayerSymbol;
-    setBoard(newBoard);
-    callback();
+  const dropInterval = setInterval(() => {
+    newBoard[currentRow][column] = " ";
+    currentRow++;
+
+    if (currentRow === rowToPlace) {
+      clearInterval(dropInterval);
+      newBoard[currentRow][column] = currentPlayerSymbol;
+      setBoard(newBoard);
+      callback();
+    } else {
+      newBoard[currentRow][column] = currentPlayerSymbol;
+      setBoard(newBoard);
+    }
   }, 100);
 };
