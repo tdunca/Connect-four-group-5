@@ -25,7 +25,7 @@ export default function Board(props: BoardProps) {
 
   const placeToken = (column: number): void => {
     setTimeout(() => {
-      console.log(botMove(grid, "hard")); //botMove med timeout 1 sec, ska vara i game egentligen
+      console.log(botMove(grid, "hard", "O")); //botMove med timeout 1 sec, ska vara i game egentligen
     }, 1000);
 
     if (winner || !canPlaceToken(column)) return;
