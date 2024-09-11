@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Board.css";
-
 
 const playerX = "X";
 const playerO = "O";
@@ -12,9 +11,10 @@ interface BoardProps {
   board: Grid;
 }
 
-export default function Board({ handleCellClick, board }: BoardProps) {
+export default function Board(props: BoardProps) {
+  const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
   const renderGrid = (): React.ReactNode => {
-    return board.map((row, rowIndex) => (
+    return props.board.map((row, rowIndex) => (
       <React.Fragment key={rowIndex}>
         {row.map((cell, colIndex) => (
           <button
@@ -22,9 +22,11 @@ export default function Board({ handleCellClick, board }: BoardProps) {
             className={`cell ${
               cell === playerX ? "x-cell" : cell === playerO ? "o-cell" : ""
             }`}
-            onClick={() => handleCellClick(colIndex)}
+            onClick={() => props.handleCellClick(colIndex)}
+            onMouseEnter={() => setHoveredColumn(colIndex)}
+            onMouseLeave={() => setHoveredColumn(null)}
           >
-            {cell !== " " ? cell : ""}
+            {cell !== " " ? <span className="star">★</span> : ""}
           </button>
         ))}
       </React.Fragment>
