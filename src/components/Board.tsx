@@ -51,15 +51,7 @@ export default function Board(props: BoardProps) {
         {row.map((cell, colIndex) => (
           <button
             key={colIndex}
-            className={`cell ${
-              cell === playerX
-                ? "x-cell"
-                : cell === player0
-                ? "o-cell"
-                : hoveredColumn === colIndex
-                ? "hovered-column"
-                : ""
-            }`}
+            className="cell"
             onClick={() => placeToken(colIndex)}
             onMouseEnter={() => setHoveredColumn(colIndex)}
             onMouseLeave={() => setHoveredColumn(null)}
