@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/GameBoard";
-//import Board from "../components/Board";
 import botMove from "../utils/bot";
 import "./Game.css";
 import { Options } from "../klasser/Options";
 import { useWinCheck } from "../utils/WinCheck";
+import { DropAnimation } from "./DropAnimation"; // Import the animateDrop function
 
 interface GameProps {
   options: Options;
@@ -26,86 +26,62 @@ export default function Game(props: GameProps) {
   const [message, setMessage] = useState<string | null>(null);
   const { winCheck, isFull } = useWinCheck(rows, columns, board);
 
-  // Сбрасываем состояние игры
+  // Reset the game
   const resetBoard = () => {
     setBoard(Array.from({ length: rows }, () => Array(columns).fill(" ")));
     setCurrentPlayerIndex(0);
     setMessage(null);
   };
 
-  // Проверяем, можно ли поставить жетон в колонку
+  // Check if we can place a token in the column
   const canPlaceToken = (column: number): boolean => {
-    return board[0][column] === " "; // Если верхняя ячейка пуста, можно ставить жетон
+    return board[0][column] === " "; // Only allow placing if the top is empty
   };
 
-  // useEffect-hook to reset the game when switching btw PvsP and PvsB modes
+  // useEffect hook to reset the game when switching between modes
   useEffect(() => {
-    // PvsBot game mode
     if (props.options.gamemode === "pvc") {
-      // players' names for PvB 'Player 1' & Bot
       setPlayers([
-        {
-          name: "Player 1",
-          symbol: "X",
-        },
-        {
-          name: "Bot",
-          symbol: "O",
-        },
+        { name: "Player 1", symbol: "X" },
+        { name: "Bot", symbol: "O" },
       ]);
-      // PvsP game mode
     } else {
-      // players' names for pVsP (Player 1 Player 2)
-
-      // let player = new Player("Player 1","X")
       setPlayers([
         { name: "Player 1", symbol: "X" },
         { name: "Player 2", symbol: "O" },
       ]);
-    } //Skriv om till props då alla settings sätts där
-    //reset the bord when gamemode changes
-    resetBoard();
-  }, [props.options.gamemode === "pvc"]); // useEffect runs whenever isVsBot changes
-
-  /* Handle click events - cell click and player moves  */
-  // the function that handle the click event when a cell is clicked
-
-  const currentPlayer = players[currentPlayerIndex]; // get the current player
-  //check if a column is full before allowing a move.
-
-  // Функция для размещения жетона
-  const placeToken = (column: number) => {
-    const currentPlayer = players[currentPlayerIndex];
-    const newBoard = board.map((row) => [...row]);
-
-    // Ищем последнюю свободную ячейку в колонке
-    for (let row = rows - 1; row >= 0; row--) {
-      if (newBoard[row][column] === " ") {
-        newBoard[row][column] = currentPlayer.symbol; // Ставим жетон
-        break;
-      }
     }
+    resetBoard();
+  }, [props.options.gamemode]);
 
-    setBoard(newBoard); // Обновляем доску
+  const currentPlayer = players[currentPlayerIndex]; // Get the current player
 
-    // Проверяем, есть ли победитель
+  // Function to handle the logic after token placement
+  const afterTokenPlacement = () => {
     if (winCheck(currentPlayer.symbol)) {
       setMessage(`${currentPlayer.name} Wins!`);
     } else if (isFull()) {
       setMessage("It's a draw!");
     } else {
-      setCurrentPlayerIndex(1 - currentPlayerIndex); // Меняем игрока
+      setCurrentPlayerIndex(1 - currentPlayerIndex); // Switch players
     }
   };
 
-  // Обработка клика на колонке
+  // Handle cell click
   const handleCellClick = (column: number) => {
-    if (message) return; // Если игра завершена, не делаем ничего
+    if (message) return; // Do nothing if the game is over
     if (!canPlaceToken(column)) {
-      setMessage("This column is full! Try another one!"); // Колонка заполнена
+      setMessage("This column is full! Try another one!");
       return;
     }
-    placeToken(column); // Размещаем жетон
+
+    DropAnimation(
+      board,
+      column,
+      currentPlayer.symbol,
+      setBoard,
+      afterTokenPlacement
+    );
   };
 
   return (

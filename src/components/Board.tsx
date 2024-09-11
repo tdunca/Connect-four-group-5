@@ -22,7 +22,7 @@ export default function Board(props: BoardProps) {
   const [grid, setGrid] = useState<Grid>(createGrid);
   const [currentPlayer, setCurrentPlayer] = useState<string>(playerX);
   const [winner, setWinner] = useState<string | null>(null);
-  const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
+  const [setHoveredColumn] = useState<number | null>(null);
 
   const placeToken = (column: number): void => {
     setTimeout(() => {
