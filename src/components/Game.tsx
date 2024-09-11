@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Player } from "../klasser/Player";
 import Board from "../components/GameBoard";
+//import Board from "../components/Board";
+import botMove from "../utils/bot";
 import "./Game.css";
 import { Options } from "../klasser/Options";
 import { useWinCheck } from "../utils/WinCheck";
@@ -31,10 +33,49 @@ export default function Game(props: GameProps) {
     setMessage(null);
   };
 
+
   // Проверяем, можно ли поставить жетон в колонку
   const canPlaceToken = (column: number): boolean => {
     return board[0][column] === " "; // Если верхняя ячейка пуста, можно ставить жетон
   };
+
+  // useEffect-hook to reset the game when switching btw PvsP and PvsB modes
+  useEffect(() => {
+    // PvsBot game mode
+    if (isVsBot) {
+      // players' names for PvB 'Player 1' & Bot
+      setPlayers([
+        {
+          name: "Player 1",
+          symbol: "X",
+        },
+        {
+          name: "Bot",
+          symbol: "O",
+        },
+      ]);
+      // PvsP game mode
+    } else {
+      // players' names for pVsP (Player 1 Player 2)
+      setPlayers([
+        { name: "Player 1", symbol: "X" },
+        { name: "Player 2", symbol: "O" },
+      ]);
+    }
+    //reset the bord when gamemode changes
+    resetBoard();
+  }, [isVsBot]); // useEffect runs whenever isVsBot changes
+
+  /* Handle click events - cell click and player moves  */
+  // the function that handle the click event when a cell is clicked
+  const handleCellClick = (column: number) => {
+    const currentPlayer = players[currentPlayerIndex]; // get the current player
+    //check if a column is full before allowing a move.
+
+    if (board[0][column] !== "") {
+      setMessage("This column is full! Try another one!"); //Displays a message when the column is full, prompting the user to choose another column
+      return;
+    }
 
   // Функция для размещения жетона
   const placeToken = (column: number) => {

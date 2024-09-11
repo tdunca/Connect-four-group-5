@@ -8,3 +8,6 @@ export function validateInput(
   const parsed = parseInt(input, 10);
   return isNaN(parsed) || parsed < min || parsed > max ? null : parsed;
 }
+export default function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
