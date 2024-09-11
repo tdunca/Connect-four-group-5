@@ -19,7 +19,7 @@ export default function botMove(
 function findOptimalMove(grid: Grid, symbol: string): string {
   //Kollar columner från höger till vänster, uppifrån ner
   for (let col = 6; col >= 0; col--) {
-    console.log("checked column " + col);
+    //console.log("checked column " + col);
     for (let row = 0; row <= 5; row++) {
       //console.log("checked row " + row);
       if (grid[row][col] !== " " && grid[row][col] === symbol) {

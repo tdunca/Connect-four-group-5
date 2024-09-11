@@ -13,6 +13,7 @@ export default function PvC(props: SettingProps) {
   const [botDifficulty, setBotDifficulty] = useState<difficulty>("easy"); //lokal state
 
   function setName(player: "player1", name: string) {
+    // setName kallas för varje onChange, men knappar uppdaterar inte state automatiskt utan väntar på handle set options, toDo
     const updatedOptions = { ...props.options };
     updatedOptions.bot1difficulty = botDifficulty;
     updatedOptions.player1name = name;
