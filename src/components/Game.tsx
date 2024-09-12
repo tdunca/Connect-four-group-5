@@ -135,6 +135,9 @@ export default function Game(props: GameProps) {
 
   return (
     <div>
+      <h3>
+        Current Turn: {currentPlayer.name} ({currentPlayer.symbol})
+      </h3>
       <Board board={board} handleCellClick={handleCellClick} />
       {message && <h3>{message}</h3>}
       <button onClick={resetBoard}>Reset</button>
