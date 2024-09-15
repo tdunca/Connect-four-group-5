@@ -54,28 +54,39 @@ export default function Settings(props: SettingProps) {
     <>
       <div className="settingOverlay">
         <h2>Choose Gamemode</h2>
+        <div className="gamemodes">
+          <button onClick={() => handleScreenChange("pvp")}>
+            Player vs Player
+          </button>
+        </div>
 
-        <button onClick={() => handleScreenChange("pvp")}>
-          Player vs Player
-        </button>
         {screen === "pvp" && (
           <PvP
             options={props.options}
             handleSetOptions={props.handleSetOptions}
           ></PvP>
         )}
-        <button onClick={() => handleScreenChange("pvc")}>
-          Player vs Computer
-        </button>
+        <div className="gamemodes">
+          {" "}
+          <button onClick={() => handleScreenChange("pvc")}>
+            Player vs Computer
+          </button>
+        </div>
+
         {screen === "pvc" && (
           <PvC
             options={props.options}
             handleSetOptions={props.handleSetOptions}
           ></PvC>
         )}
-        <button onClick={() => handleScreenChange("cvc")}>
-          Computer vs Computer
-        </button>
+
+        <div className="gamemodes">
+          {" "}
+          <button onClick={() => handleScreenChange("cvc")}>
+            Computer vs Computer
+          </button>
+        </div>
+
         {screen === "cvc" && (
           <CvC
             options={props.options}
